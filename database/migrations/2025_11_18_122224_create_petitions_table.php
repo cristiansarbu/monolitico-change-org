@@ -11,21 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('peticiones', function (Blueprint $table) {
+        Schema::create('petitions', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('categoria_id')->unsigned();
-            $table->string('titulo', 255);
-            $table->text('descripcion');
-            $table->text('destinatario');
-            $table->integer('firmantes');
-            $table->enum('estado', ['aceptada', 'pendiente']);
+            $table->bigInteger('category_id')->unsigned();
+            $table->string('title', 255);
+            $table->text('description');
+            $table->text('destinatary');
+            $table->integer('signers');
+            $table->enum('status', ['accepted', 'pending']);
 
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('CASCADE');
-            $table->foreign('categoria_id')
+            $table->foreign('category_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('CASCADE');
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('peticiones');
+        Schema::dropIfExists('petitions');
     }
 };
