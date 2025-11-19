@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class File extends Model
+{
+    protected $table = 'files';
+    protected $fillable = ['name', 'file_path'];
+
+    public function petition() {
+        return $this->belongsTo('App\Models\Petition');
+    }
+}
