@@ -31,7 +31,7 @@ class Petition extends Model
         return $this->belongsToMany('App\Models\User', 'petition_user')->withTimestamps();
     }
 
-    public function file() {
-        return $this->hasOne('App\Models\File');
+    public function files() {
+        return $this->hasMany('App\Models\File');
     }
 }
