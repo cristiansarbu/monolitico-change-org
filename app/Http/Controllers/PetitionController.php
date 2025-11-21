@@ -9,10 +9,10 @@ class PetitionController extends Controller
 {
     public function index() {
         $petitions = Petition::all();
-        return response()->json(['data' => $petitions], 200);
+        return view('petitions.index', compact('petitions'));
     }
 
     public function show(Petition $petition) {
-        return response()->json(['data' => $petition], 200);
+        return view('petitions.index', compact('petition'));
     }
 }

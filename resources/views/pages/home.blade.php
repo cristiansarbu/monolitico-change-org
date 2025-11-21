@@ -1,5 +1,13 @@
 @extends('layouts.public')
 
+@section('title')
+    <title>Home - Change.org</title>
+@endsection
+
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/landing.css') }}">
+@endsection
+
 @section('content')
     <main>
         <div class="container-fluid main-container py-4 d-flex flex-column align-items-center">

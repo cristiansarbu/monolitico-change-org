@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class File extends Model
 {
     protected $table = 'files';
-    protected $fillable = ['name', 'file_path'];
+    protected $fillable = ['name', 'file_path', 'petition_id'];
 
     public function petition() {
-        return $this->belongsTo('App\Models\Petition');
+        return $this->belongsTo('App\Models\Petition', 'petition_id');
     }
 }
