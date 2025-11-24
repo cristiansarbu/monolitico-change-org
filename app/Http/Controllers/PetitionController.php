@@ -12,7 +12,9 @@ class PetitionController extends Controller
         return view('petitions.index', compact('petitions'));
     }
 
-    public function show(Petition $petition) {
-        return view('petitions.index', compact('petition'));
+    public function show(Request $request, $id) {
+        $petition = Petition::findOrFail($id);
+        $user = $petition->user;
+        return view('petitions.show', compact('petition', 'user'));
     }
 }
