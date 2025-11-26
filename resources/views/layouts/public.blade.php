@@ -21,10 +21,11 @@
 
 <body>
     <header>
+{{--        <?php if (Auth::check()) { } else { register login } --}}
         <nav class="navbar border-bottom navbar-expand-lg">
             <div class="container-fluid container-lg align-items-baseline">
 
-                <a class="navbar-brand p-0" href="./index.html"><svg class="logo" height="100%" viewBox="0 0 245 48"
+                <a class="navbar-brand p-0" href="{{ route('home') }}"><svg class="logo" height="100%" viewBox="0 0 245 48"
                                                                      xmlns="http://www.w3.org/2000/svg" data-qa="LogoSvg">
                         <path
                             d="M71.1327 36.0307C68.6568 37.3057 67.0797 38.1309 64.1963 38.1309C58.6695 38.1309 55.0863 34.2435 55.0863 29.1359C55.0863 23.4064 59.8178 19.9453 65.2881 19.9453H71.1366V18.9969C71.1366 16.271 69.2787 14.8553 67.1108 14.8553C64.2314 14.8553 61.0674 15.9073 59.5858 16.4763C59.4726 16.5197 59.3519 16.5394 59.2309 16.5344C59.1099 16.5293 58.9911 16.4996 58.882 16.447C58.7734 16.3941 58.6767 16.3194 58.5979 16.2276C58.5191 16.1358 58.4599 16.0288 58.4239 15.9132L57.0124 11.3805C56.9468 11.169 56.9622 10.9405 57.0556 10.7398C57.149 10.5391 57.3136 10.3806 57.5173 10.2952C59.1198 9.63033 63.0188 8.16179 66.2648 8.16179C74.5891 8.16179 78.6363 11.5662 78.6363 19.5307V36.9342C78.6358 37.1698 78.5421 37.3956 78.3758 37.562C78.2095 37.7285 77.9842 37.8219 77.7493 37.8219H72.3667C72.1797 37.8219 71.9975 37.7628 71.8459 37.6529C71.6944 37.543 71.5812 37.388 71.5226 37.2099L71.1327 36.0307ZM71.1327 25.5222H66.3505C64.0657 25.5222 62.6465 26.9555 62.6465 28.6509C62.6465 30.3756 63.9176 31.3885 66.1556 31.3885C67.0848 31.3987 68.0062 31.2174 68.8626 30.8558C69.7191 30.4942 70.4924 29.9601 71.1346 29.2864L71.1327 25.5222Z"
@@ -60,10 +61,8 @@
                 </a>
 
                 <div class="d-flex align-items-center d-lg-none">
-                    <button type="button"
-                            class="create-petition-button btn btn-primary button-petition fw-bold me-3 text-header-gray py-2">Inicia
-                        una petición
-                    </button>
+                    <a href="{{ route('login') }}" class="create-petition-button btn btn-primary button-petition fw-bold me-3 text-header-gray py-2">Inicia
+                        una petición</a>
 
                     <a class="text-header-gray d-none d-md-inline-block" href="#"><svg class="search"
                                                                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -120,7 +119,7 @@
                     </ul>
 
                     <div class="buttons-right d-flex align-items-center d-none d-lg-flex">
-                        <a href="./create-petition.html">
+                        <a href="{{ route('login') }}">
                             <button type="button"
                                     class="create-petition-button btn btn-primary button-petition fw-bold me-3 text-header-gray py-2">Inicia
                                 una
