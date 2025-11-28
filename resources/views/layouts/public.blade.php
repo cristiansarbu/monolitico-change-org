@@ -8,11 +8,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     @yield('title')
+
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+
     @yield('styles')
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&display=swap" rel="stylesheet">
@@ -21,7 +25,6 @@
 
 <body>
     <header>
-{{--        <?php if (Auth::check()) { } else { register login } --}}
         <nav class="navbar border-bottom navbar-expand-lg">
             <div class="container-fluid container-lg align-items-baseline">
 
@@ -59,7 +62,6 @@
                             fill="currentColor" />
                     </svg>
                 </a>
-
                 <div class="d-flex align-items-center d-lg-none">
                     <a href="{{ route('login') }}" class="create-petition-button btn btn-primary button-petition fw-bold me-3 text-header-gray py-2">Inicia
                         una petición</a>
@@ -93,15 +95,9 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                    <ul class="navbar-nav ms-3 gap-3 me-auto mb-2 mb-lg-0 d-none d-lg-flex">
+                    <ul class="navbar-nav ms-3 gap-3 me-auto mb-2 mb-lg-0 d-none d-lg-flex align-items-lg-center">
                         <li class="nav-item">
-                            <a class="nav-link fw-bold text-header-gray" aria-current="page" href="#">Mis peticiones</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fw-bold text-header-gray" href="#">Programa de socios/as</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link fw-bold text-header-gray" href="./petitions.html"><svg class="search"
+                            <a class="nav-link fw-bold text-header-gray" href="{{ route('petitions.index') }}"><svg class="search"
                                                                                                       viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                                                                                       aria-hidden="true" class="h-6 w-6" focusable="false" style="fill: currentcolor;">
                                     <g id="search" clip-path="url(#clip0_303_7720)">
@@ -116,29 +112,45 @@
                                     </defs>
                                 </svg>Buscar</a>
                         </li>
+                        @if(Auth::check())
+                            <a href="{{ route('petitions.mine') }}"
+                               class="text-decoration-none text-dark fw-bold text-header-gray nav-item p-2 py-1 me-3">Mis Peticiones</a>
+                        @endif
                     </ul>
 
                     <div class="buttons-right d-flex align-items-center d-none d-lg-flex">
-                        <a href="{{ route('login') }}">
-                            <button type="button"
-                                    class="create-petition-button btn btn-primary button-petition fw-bold me-3 text-header-gray py-2">Inicia
-                                una
-                                petición</button>
-                        </a>
-                        <a href=""
-                           class="text-decoration-none text-dark fw-bold text-header-gray nav-item p-2 py-1">Entrar</a>
+                        @if(Auth::check())
+                            <a href="{{ route('login') }}">
+                                <button type="button"
+                                        class="create-petition-button btn btn-primary button-petition fw-bold me-3 text-header-gray py-2">Inicia
+                                    una
+                                    petición</button>
+                            </a>
+                            <a href="{{ route('dashboard') }}"
+                               class="text-decoration-none text-dark fw-bold text-header-gray nav-item p-2 py-1 me-3">Perfil</a>
+                            <a href="{{ route('logout') }}"
+                               class="text-decoration-none text-dark fw-bold text-header-gray nav-item p-2 py-1">Cerrar Sesión</a>
+                        @else
+                            <a href="{{ route('login') }}">
+                                <button type="button"
+                                        class="create-petition-button btn btn-primary button-petition fw-bold me-3 text-header-gray py-2">Inicia
+                                    una
+                                    petición</button>
+                            </a>
+                            <a href="{{ route('login') }}"
+                               class="text-decoration-none text-dark fw-bold text-header-gray nav-item p-2 py-1 me-3">Entrar</a>
+                            <a href="{{ route('register') }}"
+                               class="text-decoration-none text-dark fw-bold text-header-gray nav-item p-2 py-1">Registrarse</a>
+                        @endif
                     </div>
 
                     <div class="border-top d-lg-none">
                         <ul class="list-unstyled">
                             <li class="nav-item pt-3">
-                                <a class="nav-link text-header-gray" href="#">Programa de socios/as</a>
-                            </li>
-                            <li class="nav-item pt-3">
-                                <a class="nav-link text-header-gray" href="#">Buscar</a>
+                                <a class="nav-link text-header-gray" href="{{ route('petitions.index') }}">Buscar</a>
                             </li>
                         </ul>
-                        <a href="" class="nav-link text-header-gray border-top pt-3">Entra o regístrate</a>
+                        <a href="{{ route('login') }}" class="nav-link text-header-gray border-top pt-3 mb-2">Entra o regístrate</a>
                     </div>
 
                 </div>

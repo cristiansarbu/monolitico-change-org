@@ -20,7 +20,7 @@ Route::controller(\App\Http\Controllers\PetitionController::class)->group(functi
     Route::get('petitions/index', 'index')->name('petitions.index');
     Route::get('petitions/{id}', 'show')->name('petitions.show');
 
-    Route::get('mispetitions', 'listMine')->name('petitions.mine');
+    Route::get('mypetitions', 'listMine')->name('petitions.mine')->middleware('auth');
     Route::get('petitionsfirmadas', 'petitionsFirmadas')->name('petitions.petitionsfirmadas');
     Route::get('petition/add', 'create')->name('petitions.create');
 

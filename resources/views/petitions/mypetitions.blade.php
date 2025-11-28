@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title')
-    <title>Peticiones - Change.org</title>
+    <title>Mis peticiones - Change.org</title>
 @endsection
 
 @section('styles')
@@ -10,10 +10,7 @@
 
 @section('content')
     <section class="container d-flex flex-column gap-4 mt-5">
-        <h1 class="fw-bold fs-275rem fs-lg-5rem text-lg-center">Descubre tu próxima causa</h1>
-        <h4 class="fw-light d-none d-lg-block mt-negative text-center">Explora millones de peticiones y encuentra las
-            que te
-            interesan</h4>
+        <h1 class="fw-bold fs-275rem fs-lg-5rem text-lg-center">Explora tus peticiones</h1>
 
         <div class="row row-cols-1 g-4 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 mb-5">
             @foreach($petitions as $petition)
