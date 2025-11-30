@@ -16,7 +16,7 @@
             @foreach($petitions as $petition)
                 <div class="col">
                     <div class="card card-causa shadow mw-desktop-card-causa flex-1 mx-auto position-relative">
-                        <img src="{{ asset('img/landing/causa1.webp') }}" alt="" srcset="">
+                        <img src="{{ asset('petitions/' . $petition->files[0]->file_path) }}" alt="" srcset="" style="max-height: 170px; object-fit: cover;">
                         <div class="card-body d-flex flex-column justify-content-between">
                             <h5 class="card-title fw-bold fs-1125 mb-2 mt-2">{{ $petition->title }}</h5>
                             <h6 class="text-body fw-light card-small-text mb-3">{{ $petition->description }}</h6>
@@ -30,7 +30,7 @@
                                     </path>
                                 </svg> <span class="texto-card-firmas fw-bold">{{ $petition->signers }} firmas</span></h6>
                             <button class="btn-firmar fw-bold text-body mt-3"><a
-                                    class="text-decoration-none text-body stretched-link" href="./petition.html">Firmar esta
+                                    class="text-decoration-none text-body stretched-link" href="{{ route('petitions.show', $petition->id) }}">Firmar esta
                                     petición</a></button>
                         </div>
                     </div>

@@ -114,24 +114,29 @@
                         </li>
                         @if(Auth::check())
                             <a href="{{ route('petitions.mine') }}"
-                               class="text-decoration-none text-dark fw-bold text-header-gray nav-item p-2 py-1 me-3">Mis Peticiones</a>
+                               class="text-decoration-none text-dark fw-bold text-header-gray nav-item p-2 py-1">Mis Peticiones</a>
+                            <a href="{{ route('petitions.signedPetitions') }}"
+                               class="text-decoration-none text-dark fw-bold text-header-gray nav-item p-2 py-1 me-3">Mis Firmas</a>
                         @endif
                     </ul>
 
                     <div class="buttons-right d-flex align-items-center d-none d-lg-flex">
                         @if(Auth::check())
-                            <a href="{{ route('login') }}">
+                            <a href="{{ route('petitions.create') }}">
                                 <button type="button"
                                         class="create-petition-button btn btn-primary button-petition fw-bold me-3 text-header-gray py-2">Inicia
                                     una
                                     petición</button>
                             </a>
-                            <a href="{{ route('dashboard') }}"
+                            <a href="{{ route('profile.edit') }}"
                                class="text-decoration-none text-dark fw-bold text-header-gray nav-item p-2 py-1 me-3">Perfil</a>
-                            <a href="{{ route('logout') }}"
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout').submit();"
                                class="text-decoration-none text-dark fw-bold text-header-gray nav-item p-2 py-1">Cerrar Sesión</a>
+                            <form id="logout" action="{{route('logout')}}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         @else
-                            <a href="{{ route('login') }}">
+                            <a href="{{ route('petitions.create') }}">
                                 <button type="button"
                                         class="create-petition-button btn btn-primary button-petition fw-bold me-3 text-header-gray py-2">Inicia
                                     una

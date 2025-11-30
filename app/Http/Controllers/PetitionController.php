@@ -3,24 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\File;
 use App\Models\Petition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PetitionController extends Controller
 {
-    public function index() {
-        $petitions = Petition::all();
+    public function index()
+    {
+        $petitions = Petition::paginate(5);
         return view('petitions.index', compact('petitions'));
     }
 
-    public function show(Request $request, $id) {
+    public function show(Request $request, $id)
+    {
         $petition = Petition::findOrFail($id);
         $user = $petition->user;
         return view('petitions.show', compact('petition', 'user'));
     }
 
-    public function listMine(Request $request) {
+    public function listMine(Request $request)
+    {
         try {
             $user = Auth::user();
             $petitions = Petition::where('user_id', $user->id)->paginate(5);
@@ -30,8 +34,9 @@ class PetitionController extends Controller
         return view('petitions.mypetitions', compact('petitions'));
     }
 
-    public function store(Request $request) {
-        $request->validate($request, [
+    public function store(Request $request)
+    {
+        $request->validate([
             'title' => 'required|max:255',
             'description' => 'required',
             'destinatary' => 'required',
@@ -41,8 +46,9 @@ class PetitionController extends Controller
 
         $input = $request->all();
 
+
         try {
-            $category = Category::findOrFail($input['category']);
+            $category = Category::where('name', $input['category'])->firstOrFail();
             $user = Auth::user();
             $petition = new Petition($input);
             $petition->category()->associate($category);
@@ -66,7 +72,8 @@ class PetitionController extends Controller
         }
     }
 
-    public function fileUpload(Request $req, $petition_id = null) {
+    public function fileUpload(Request $req, $petition_id = null)
+    {
         $file = $req->file('file');
         $fileModel = new File;
         $fileModel->petition_id = $petition_id;
@@ -81,4 +88,30 @@ class PetitionController extends Controller
         }
         return 1;
     }
+
+    public function create()
+    {
+        return view('petitions.create');
+    }
+
+    public function sign(Request $request, $id) {
+        try {
+            $petition = Petition::findOrFail($id);
+            $user = Auth::user();
+            $signers = $petition->signers()->get();
+            foreach ($signers as $signer) {
+                if ($signer->id == $user->id) {
+                    return back()->withError('Ya has firmado esta petición.')->withInput();
+                }
+            }
+            $user_id = [$user->id];
+            $petition->signers()->attach($user_id);
+            $petition->signers = $petition->signers + 1;
+            $petition->save();
+        } catch (\Exception $e) {
+            return back()->withError($e->getMessage())->withInput();
+        }
+        return redirect()->back();
+    }
+
 }

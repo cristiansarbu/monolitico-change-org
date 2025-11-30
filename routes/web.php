@@ -17,20 +17,23 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::controller(\App\Http\Controllers\PetitionController::class)->group(function () {
+    Route::get('mypetitions', 'listMine')->name('petitions.mine')->middleware('auth');
+    Route::get('petitions/add', 'create')->name('petitions.create');
+
     Route::get('petitions/index', 'index')->name('petitions.index');
     Route::get('petitions/{id}', 'show')->name('petitions.show');
 
-    Route::get('mypetitions', 'listMine')->name('petitions.mine')->middleware('auth');
-    Route::get('petitionsfirmadas', 'petitionsFirmadas')->name('petitions.petitionsfirmadas');
-    Route::get('petition/add', 'create')->name('petitions.create');
-
     Route::post('petition', 'store')->name('petitions.store');
-    Route::post('petitions/firmar/{id}', 'firmar')->name('petitions.firmar');
+    Route::post('petitions/sign/{id}', 'sign')->name('petitions.sign');
 
     Route::delete('petitions/{id}', 'delete')->name('petitions.delete');
     Route::put('petitions/{id}', 'update')->name('petitions.update');
 
     Route::get('petitions/edit/{id}', 'update')->name('petitions.edit');
+});
+
+Route::controller(\App\Http\Controllers\VoyagerUsersController::class)->group(function() {
+    Route::get('signedpetitions', 'signedPetitions')->name('petitions.signedPetitions');
 });
 
 Route::get('/users/firmas', [\App\Http\Controllers\UserController::class, 'petitionsFirmadas'])

@@ -17,7 +17,7 @@
                 <h1 class="fw-bold fs-1 text-center text-lg-start">{{ $petition->title }}</h1>
 
                 <div class="mt-4 mb-5">
-                    <img src="./img/landing/causa4-webp.webp" class="img-fluid">
+                    <img src="{{ asset('petitions/' . $petition->files[0]->file_path) }}" class="img-fluid">
                 </div>
 
                 <div class="border-top pt-3">
@@ -59,33 +59,8 @@
                     <hr>
 
                     <h5 class="fw-bold mb-3 fs-medium">Firma esta petición</h5>
-                    <form>
-                        <div class="mb-3">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="apellidos" class="form-label">Apellidos</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="correo" class="form-label">Correo electrónico</label>
-                            <input type="email" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="correo" class="form-label">Ciudad</label>
-                            <input type="email" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="correo" class="form-label">País</label>
-                            <input type="email" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="correo" class="form-label">Codigo postal</label>
-                            <input type="email" class="form-control">
-                        </div>
-
-
+                    <form id="sign" action="{{route('petitions.sign', $petition->id)}}" method="POST">
+                        @csrf
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" value="" id="gana">
                             <label class="form-check-label small" for="gana">
