@@ -17,6 +17,13 @@
                 Completa la información siguiente para que podamos ayudarte a generar una petición clara, sólida e impactante.
             </p>
 
+            @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    <strong>Error:</strong> {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             {{-- FORMULARIO --}}
             <form action="{{ route('petitions.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -61,11 +68,22 @@
                 {{-- CATEGORÍA --}}
                 <div class="mb-4">
                     <label for="category" class="form-label fw-bold">Categoría de la petición *</label>
-                    <input type="text" id="category" name="category"
-                           class="form-control @error('category') is-invalid @enderror"
-                           placeholder="Ejemplo: Educación, Medioambiente, Derechos humanos..."
-                           value="{{ old('category') }}">
-                    <small class="text-muted">Escribe una categoría que describa tu petición.</small>
+                    {{-- Reemplazamos el input por un select --}}
+                    <select id="category" name="category"
+                            class="form-select @error('category') is-invalid @enderror">
+
+                        <option value="">Selecciona una categoría</option>
+
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}"
+                                {{ old('category') == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
+
+                    </select>
+
+                    <small class="text-muted">Elige una categoría que describa tu petición.</small>
                     @error('category')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

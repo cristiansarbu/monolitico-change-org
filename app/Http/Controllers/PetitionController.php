@@ -48,7 +48,7 @@ class PetitionController extends Controller
 
 
         try {
-            $category = Category::where('name', $input['category'])->firstOrFail();
+            $category = Category::find($input['category'])->firstOrFail();
             $user = Auth::user();
             $petition = new Petition($input);
             $petition->category()->associate($category);
@@ -91,7 +91,8 @@ class PetitionController extends Controller
 
     public function create()
     {
-        return view('petitions.create');
+        $categories = Category::all();
+        return view('petitions.create', compact('categories'));
     }
 
     public function sign(Request $request, $id) {
