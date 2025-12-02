@@ -12,7 +12,14 @@
     <section class="container d-flex flex-column gap-4 mt-5">
         <h1 class="fw-bold fs-275rem fs-lg-5rem text-lg-center">Explora tus peticiones</h1>
 
-        <div class="row row-cols-1 g-4 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 mb-5">
+        @if($petitions->isEmpty())
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="alert alert-info text-center w-50" role="alert">
+                    No has creado ninguna petición.
+                </div>
+            </div>
+        @else
+            <div class="row row-cols-1 g-4 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 mb-5">
             @foreach($petitions as $petition)
                 <div class="col">
                     <div class="card card-causa shadow mw-desktop-card-causa flex-1 mx-auto position-relative">
@@ -36,6 +43,7 @@
                     </div>
                 </div>
             @endforeach
+        @endif
         </div>
         {{--Si $petitions usa paginator (tiene paginas) se muestra la navegacion, si no no, porque hay otras rutas
         sin paginación que llaman a esta vista y si no, da error--}}

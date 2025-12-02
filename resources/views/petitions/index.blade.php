@@ -15,7 +15,14 @@
             que te
             interesan</h4>
 
-        <div class="row row-cols-1 g-4 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 mb-5">
+        @if($petitions->isEmpty())
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="alert alert-info text-center w-50" role="alert">
+                    No existen peticiones.
+                </div>
+            </div>
+        @else
+            <div class="row row-cols-1 g-4 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 mb-5">
             @foreach($petitions as $petition)
                 <div class="col">
                     <div class="card card-causa shadow mw-desktop-card-causa flex-1 mx-auto position-relative">
@@ -43,6 +50,7 @@
                     </div>
                 </div>
             @endforeach
+        @endif
         </div>
 
         {{--Si $petitions usa paginator (tiene paginas) se muestra la navegacion, si no no, porque hay otras rutas

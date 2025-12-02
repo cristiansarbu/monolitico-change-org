@@ -24,11 +24,9 @@
                 </div>
             @endif
 
-            {{-- FORMULARIO --}}
             <form action="{{ route('petitions.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                {{-- TÍTULO --}}
                 <div class="mb-4">
                     <label for="title" class="form-label fw-bold">Título de la petición *</label>
                     <input type="text" id="title" name="title"
@@ -41,7 +39,6 @@
                     @enderror
                 </div>
 
-                {{-- DESCRIPCIÓN --}}
                 <div class="mb-4">
                     <label for="description" class="form-label fw-bold">Descripción detallada *</label>
                     <textarea id="description" name="description" rows="5"
@@ -52,7 +49,6 @@
                     @enderror
                 </div>
 
-                {{-- DESTINATARIO --}}
                 <div class="mb-4">
                     <label for="destinatary" class="form-label fw-bold">¿A quién va dirigida la petición? *</label>
                     <input type="text" id="destinatary" name="destinatary"
@@ -65,10 +61,8 @@
                     @enderror
                 </div>
 
-                {{-- CATEGORÍA --}}
                 <div class="mb-4">
                     <label for="category" class="form-label fw-bold">Categoría de la petición *</label>
-                    {{-- Reemplazamos el input por un select --}}
                     <select id="category" name="category"
                             class="form-select @error('category') is-invalid @enderror">
 
@@ -90,7 +84,6 @@
                 </div>
 
 
-                {{-- ARCHIVO / IMAGEN --}}
                 <div class="mb-4">
                     <label for="file" class="form-label fw-bold">Imagen o archivo relacionado *</label>
                     <input type="file" id="file" name="file"
@@ -102,7 +95,6 @@
                     @enderror
                 </div>
 
-                {{-- BOTONES --}}
                 <div class="d-flex justify-content-end gap-3 mt-4">
                     <a href="{{ url()->previous() }}" class="btn btn-outline-secondary fw-bold px-4 py-2">
                         Volver

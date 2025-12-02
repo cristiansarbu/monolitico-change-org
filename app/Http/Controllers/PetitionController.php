@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\File;
 use App\Models\Petition;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -113,6 +114,13 @@ class PetitionController extends Controller
             return back()->withError($e->getMessage())->withInput();
         }
         return redirect()->back();
+    }
+
+    public function signedPetitions(Request $request) {
+        $id = Auth::id();
+        $user = User::findOrFail($id);
+        $petitions = $user->signedPetitions()->paginate(4);
+        return view('petitions.signedpetitions', compact('petitions'));
     }
 
 }

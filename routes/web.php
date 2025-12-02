@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
 Route::controller(\App\Http\Controllers\PetitionController::class)->group(function () {
     Route::get('mypetitions', 'listMine')->name('petitions.mine')->middleware('auth');
     Route::get('petitions/add', 'create')->name('petitions.create')->middleware('auth');
+    Route::get('petitions/signedpetitions', 'signedPetitions')->name('petitions.signedPetitions');
 
     Route::get('petitions/index', 'index')->name('petitions.index');
     Route::get('petitions/{id}', 'show')->name('petitions.show');
@@ -30,10 +31,6 @@ Route::controller(\App\Http\Controllers\PetitionController::class)->group(functi
     Route::put('petitions/{id}', 'update')->name('petitions.update')->middleware('auth');
 
     Route::get('petitions/edit/{id}', 'update')->name('petitions.edit')->middleware('auth');
-});
-
-Route::controller(\App\Http\Controllers\VoyagerUsersController::class)->group(function() {
-    Route::get('signedpetitions', 'signedPetitions')->name('petitions.signedPetitions');
 });
 
 Route::get('/users/firmas', [\App\Http\Controllers\UserController::class, 'petitionsFirmadas'])
