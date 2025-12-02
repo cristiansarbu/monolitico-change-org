@@ -20,6 +20,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ asset('img/header/logo.svg') }}" type="image/x-icon">
     <script src="{{ asset('/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
 </head>
 

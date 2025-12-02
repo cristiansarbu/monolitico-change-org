@@ -12,7 +12,7 @@ class PetitionController extends Controller
 {
     public function index()
     {
-        $petitions = Petition::paginate(5);
+        $petitions = Petition::paginate(4);
         return view('petitions.index', compact('petitions'));
     }
 
@@ -27,7 +27,7 @@ class PetitionController extends Controller
     {
         try {
             $user = Auth::user();
-            $petitions = Petition::where('user_id', $user->id)->paginate(5);
+            $petitions = Petition::where('user_id', $user->id)->paginate(4);
         } catch (\Exception $exception) {
             return back()->withError($exception->getMessage())->withInput();
         }

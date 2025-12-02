@@ -37,6 +37,16 @@
                 </div>
             @endforeach
         </div>
-
+        {{--Si $petitions usa paginator (tiene paginas) se muestra la navegacion, si no no, porque hay otras rutas
+        sin paginación que llaman a esta vista y si no, da error--}}
+        {{-- En app/providers/AppServiceProvider añadimos sentencia de Bootstrap para que el paginator use Bootstrap
+         en vez de Tailwind --}}
+        @if($petitions instanceof \Illuminate\Pagination\LengthAwarePaginator)
+            @if ($petitions->hasPages())
+                <div class="d-flex justify-content-center mb-5">
+                    {{ $petitions->links() }}
+                </div>
+            @endif
+        @endif
     </section>
 @endsection

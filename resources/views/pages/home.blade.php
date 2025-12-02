@@ -1,3 +1,7 @@
+@php
+    use Illuminate\Support\Facades\Auth;
+@endphp
+
 @extends('layouts.public')
 
 @section('title')
@@ -18,8 +22,13 @@
                 <h3 class="fw-light">Únete a <span class="fw-bold">567.390.099</span> personas que están impulsando un
                     cambio real en sus
                     comunidades.</h3>
-                <a href="./create-petition.html" class="btn button-create-petition py-3 fw-bold">Crear una petición</a>
-                <a href="./create-petition.html" class="btn button-start-ai py-3 fw-bold">Comenzar con IA</a>
+                @if(Auth::check())
+                    <a href="{{ route('petitions.create') }}" class="btn button-create-petition py-3 fw-bold">Crear una petición</a>
+                    <a href="{{ route('petitions.create') }}" class="btn button-start-ai py-3 fw-bold">Comenzar con IA</a>
+                @else
+                    <a href="{{ route('login') }}" class="btn button-create-petition py-3 fw-bold">Crear una petición</a>
+                    <a href="{{ route('login') }}" class="btn button-start-ai py-3 fw-bold">Comenzar con IA</a>
+                @endif
             </div>
 
             <!-- Carousel Móvil -->
@@ -184,12 +193,21 @@
                                     cambio real en sus
                                     comunidades.</h3>
                                 <div class="d-flex justify-content-center align-items-center gap-3">
-                                    <a href="./create-petition.html"
-                                       class="btn button-create-petition py-3 fw-bold btn-responsive">Crear una
-                                        petición</a>
-                                    <a href="./create-petition.html"
-                                       class="btn button-start-ai py-3 fw-bold btn-responsive">Comenzar con
-                                        IA</a>
+                                    @if(Auth::check())
+                                        <a href="{{ route('petitions.create') }}"
+                                           class="btn button-create-petition py-3 fw-bold btn-responsive">Crear una
+                                            petición</a>
+                                        <a href="{{ route('petitions.create') }}"
+                                           class="btn button-start-ai py-3 fw-bold btn-responsive">Comenzar con
+                                            IA</a>
+                                    @else
+                                        <a href="{{ route('login') }}"
+                                           class="btn button-create-petition py-3 fw-bold btn-responsive">Crear una
+                                            petición</a>
+                                        <a href="{{ route('login') }}"
+                                           class="btn button-start-ai py-3 fw-bold btn-responsive">Comenzar con
+                                            IA</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -390,7 +408,7 @@
             <div class="card card-causa shadow mw-desktop-card-causa flex-1 position-relative">
                 <img src="./img/landing/causa1.webp" alt="" srcset="">
                 <div class="card-body d-flex flex-column justify-content-between">
-                    <a href="./petition.html"
+                    <a href="#"
                        class="card-title fw-bold fs-1125 mb-4 text-decoration-none stretched-link">Mi hija se suicidó
                         con 15 años. El
                         bullying NO es cosa
@@ -414,7 +432,7 @@
             <div class="card card-causa shadow mw-desktop-card-causa flex-1 position-relative">
                 <img src="./img/landing/causa2.webp" alt="" srcset="">
                 <div class="card-body d-flex flex-column justify-content-between">
-                    <a href="./petition.html"
+                    <a href="#"
                        class="card-title fw-bold fs-1125 mb-4 text-decoration-none stretched-link">El asesino de mi
                         hijo tenía 17 años. Pido revisar YA
                         la
@@ -435,7 +453,7 @@
             <div class="card card-causa shadow mw-desktop-card-causa flex-1 position-relative">
                 <img src="./img/landing/causa3.webp" alt="" srcset="">
                 <div class="card-body d-flex flex-column justify-content-between">
-                    <a href="./petition.html"
+                    <a href="#"
                        class="card-title fw-bold fs-1125 mb-4 text-decoration-none stretched-link">Me han echado de
                         clase por llevar Hiyab. ¡Libertad
                         religiosa
@@ -455,7 +473,7 @@
             <div class="card card-causa shadow mw-desktop-card-causa flex-1 position-relative">
                 <img src="./img/landing/causa4-webp.webp" alt="" srcset="">
                 <div class="card-body d-flex flex-column justify-content-between">
-                    <a href="./petition.html"
+                    <a href="#"
                        class="card-title fw-bold fs-1125 mb-4 text-decoration-none stretched-link">Soy víctima de
                         violencia machista. Pido mejorar
                         urgentemente

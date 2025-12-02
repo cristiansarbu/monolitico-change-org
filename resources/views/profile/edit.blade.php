@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title')
-    <title>Peticiones - Change.org</title>
+    <title>Perfil - Change.org</title>
 @endsection
 
 @section('styles')

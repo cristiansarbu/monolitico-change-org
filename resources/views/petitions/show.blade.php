@@ -11,7 +11,11 @@
 @section('content')
     <main class="container mt-5">
         <div class="row">
-
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             <div class="col-12 col-lg-8">
 
                 <h1 class="fw-bold fs-1 text-center text-lg-start">{{ $petition->title }}</h1>

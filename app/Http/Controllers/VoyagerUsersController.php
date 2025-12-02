@@ -13,10 +13,10 @@ class VoyagerUsersController extends Controller
         try {
             $id = Auth::id();
             $user = User::findOrFail($id);
-            $petitions = $user->signedPetitions()->get();
+            $petitions = $user->signedPetitions()->paginate(4);
         } catch (\Exception $e) {
             return back()->withError($e->getMessage())->withInput();
         }
-        return view('petitions.index', compact('petitions'));
+        return view('petitions.signedpetitions', compact('petitions'));
     }
 }
