@@ -1,0 +1,22 @@
+/* Estilos base del botón de Edición (Azul brillante) */
+.btn-secundario {
+    background-color: #008ED7; /* Color base: Azul Brillante */
+    border: none;
+    color: #ffffff;
+    /* Se utiliza box-shadow suave para dar un poco de profundidad */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease-in-out; /* Transición suave SOLAMENTE para el color */
+}
+
+/* Estilos del botón de Edición al pasar el ratón (Hover) */
+.btn-secundario:hover {
+    background-color: #007EB8; /* Cambio de color sutil (solo un poco más oscuro) */
+    /* Se elimina la propiedad 'transform' para que el botón no se mueva */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* La sombra puede aumentar un poco si es deseado */
+}
+
+/* Estilos para el estado activo/clic (simula un hundimiento sin movimiento brusco) */
+.btn-secundario:active, .btn-secundario:focus {
+    background-color: #007EB8; /* Mantiene el color oscuro */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Reduce la sombra al hacer clic */
+}
