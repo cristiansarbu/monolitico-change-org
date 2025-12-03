@@ -27,7 +27,7 @@ return new class extends Migration
                 ->onDelete('CASCADE');
             $table->foreign('category_id')
                 ->references('id')
-                ->on('users')
+                ->on('categories')
                 ->onDelete('CASCADE');
 //          $table->string('image', 255, ); No se necesita
             $table->timestamps();

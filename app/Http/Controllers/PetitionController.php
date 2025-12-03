@@ -14,7 +14,8 @@ class PetitionController extends Controller
     public function index()
     {
         $petitions = Petition::paginate(4);
-        return view('petitions.index', compact('petitions'));
+        $categories = Category::all();
+        return view('petitions.index', compact('petitions', 'categories'));
     }
 
     public function show(Request $request, $id)
@@ -24,10 +25,18 @@ class PetitionController extends Controller
         return view('petitions.show', compact('petition', 'user'));
     }
 
+    public function listCategory($category) {
+        $category = Category::findOrFail($category);
+        $petitions = $category->petitions;
+        $categories = Category::all();
+        return view('petitions.index', compact('petitions', 'categories'));
+    }
+
     public function listMine(Request $request)
     {
         try {
             $user = Auth::user();
+            // Esto se podría reemplazar por $user->petitions
             $petitions = Petition::where('user_id', $user->id)->paginate(4);
         } catch (\Exception $exception) {
             return back()->withError($exception->getMessage())->withInput();
@@ -41,15 +50,14 @@ class PetitionController extends Controller
             'title' => 'required|max:255',
             'description' => 'required',
             'destinatary' => 'required',
-            'category' => 'required',
+            'category_id' => 'required',
             'file' => 'required|file|mimes:jpeg,png,jpg,svg'
         ]);
 
         $input = $request->all();
 
-
         try {
-            $category = Category::find($input['category'])->firstOrFail();
+            $category = Category::findOrFail($input['category_id']);
             $user = Auth::user();
             $petition = new Petition($input);
             $petition->category()->associate($category);

@@ -185,7 +185,7 @@ main h3 span {
 }
 
 .flex-1 {
-  flex: 1 1 0%;
+  flex: 1 1 0;
 }
 
 .btn-categoria {
@@ -249,6 +249,7 @@ main h3 span {
     min-height: 100% !important;
   }
 }
+
 @media (max-width: 1200px) {
   .fs-cambio-responsive {
     font-size: 3rem !important;
@@ -284,6 +285,7 @@ main h3 span {
     top: 40%;
   }
 }
+
 @media ((min-width: 1201px) and (max-width: 1400px)) {
   .fs-cambio-responsive {
     font-size: 4rem !important;
@@ -293,11 +295,11 @@ main h3 span {
   }
   .abs-top-izq {
     position: absolute;
-    left: 0%;
+    left: 0;
   }
   .abs-top-der {
     position: absolute;
-    right: 0%;
+    right: 0;
   }
   .abs-centro {
     position: absolute;

@@ -24,10 +24,10 @@
                     <div class="col">
                         <div class="card card-causa shadow mw-desktop-card-causa flex-1 mx-auto position-relative">
                             <img src="{{ asset('petitions/' . $petition->files[0]->file_path) }}" alt="" srcset=""
-                                 style="max-height: 170px; object-fit: cover;">
+                                 style="height: 170px; object-fit: cover;">
                             <div class="card-body d-flex flex-column justify-content-between">
-                                <h5 class="card-title fw-bold fs-1125 mb-2 mt-2">{{ $petition->title }}</h5>
-                                <h6 class="text-body fw-light card-small-text mb-3">{{ $petition->description }}</h6>
+                                <h5 class="card-title fw-bold fs-1125 mb-2 mt-2 text-clamp">{{ $petition->title }}</h5>
+                                <h6 class="text-body fw-light card-small-text mb-3 text-clamp">{{ $petition->description }}</h6>
                                 <h6>
                                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                          aria-hidden="true" class="icono-cards" focusable="false" style="fill:currentColor">
@@ -41,7 +41,7 @@
                                     <span class="texto-card-firmas fw-bold">{{ $petition->signers }} firmas</span></h6>
                                 <button class="btn-firmar fw-bold text-body mt-3"><a
                                         class="text-decoration-none text-body stretched-link"
-                                        href="{{ route('petitions.show', $petition->id) }}">Ver la petición</a></button>
+                                        href="{{ route('petitions.show', $petition->id) }}">Ver esta petición</a></button>
                             </div>
                         </div>
                     </div>

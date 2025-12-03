@@ -15,6 +15,21 @@
             que te
             interesan</h4>
 
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
+            @foreach($categories as $category)
+                <a href="{{ route('petitions.category', $category->id) }}"
+                   class="btn-categoria d-flex align-items-center gap-2 position-relative text-decoration-none">
+                    {{ $category->name }}
+                    <svg viewBox="0 0 24 24" class="icono-categoria" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                         aria-hidden="true" focusable="false">
+                        <g>
+                            <path d="M5 13H16.17L11.29 17.88C10.9 18.27 10.9 18.91 11.29 19.3C11.68 19.69 12.31 19.69 12.7 19.3L19.29 12.71C19.68 12.32 19.68 11.69 19.29 11.3L12.71 4.69997C12.32 4.30997 11.69 4.30997 11.3 4.69997C10.91 5.08997 10.91 5.71997 11.3 6.10997L16.17 11H5C4.45 11 4 11.45 4 12C4 12.55 4.45 13 5 13Z"></path>
+                        </g>
+                    </svg>
+                </a>
+            @endforeach
+        </div>
+
         @if($petitions->isEmpty())
             <div class="d-flex justify-content-center align-items-center">
                 <div class="alert alert-info text-center w-50" role="alert">
@@ -27,10 +42,10 @@
                 <div class="col">
                     <div class="card card-causa shadow mw-desktop-card-causa flex-1 mx-auto position-relative">
                         <img src="{{ asset('petitions/' . $petition->files[0]->file_path) }}" alt="" srcset=""
-                             style="max-height: 170px; object-fit: cover;">
+                             style="height: 170px; object-fit: cover;">
                         <div class="card-body d-flex flex-column justify-content-between">
-                            <h5 class="card-title fw-bold fs-1125 mb-2 mt-2">{{ $petition->title }}</h5>
-                            <h6 class="text-body fw-light card-small-text mb-3">{{ $petition->description }}</h6>
+                            <h5 class="card-title fw-bold fs-1125 mb-2 mt-2 text-clamp">{{ $petition->title }}</h5>
+                            <h6 class="text-body fw-light card-small-text mb-3 text-clamp">{{ $petition->description }}</h6>
                             <h6>
                                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                      aria-hidden="true" class="icono-cards" focusable="false" style="fill:currentColor">

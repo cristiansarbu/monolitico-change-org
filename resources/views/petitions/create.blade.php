@@ -62,15 +62,15 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="category" class="form-label fw-bold">Categoría de la petición *</label>
-                    <select id="category" name="category"
+                    <label for="category_id" class="form-label fw-bold">Categoría de la petición *</label>
+                    <select id="category_id" name="category_id"
                             class="form-select @error('category') is-invalid @enderror">
 
                         <option value="">Selecciona una categoría</option>
 
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}"
-                                {{ old('category') == $category->id ? 'selected' : '' }}>
+                                {{ old('category_id') == $category->id ? 'selected' : '' }}>
                                 {{ $category->name }}
                             </option>
                         @endforeach

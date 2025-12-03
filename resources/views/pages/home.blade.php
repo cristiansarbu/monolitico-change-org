@@ -24,10 +24,8 @@
                     comunidades.</h3>
                 @if(Auth::check())
                     <a href="{{ route('petitions.create') }}" class="btn button-create-petition py-3 fw-bold">Crear una petición</a>
-                    <a href="{{ route('petitions.create') }}" class="btn button-start-ai py-3 fw-bold">Comenzar con IA</a>
                 @else
                     <a href="{{ route('login') }}" class="btn button-create-petition py-3 fw-bold">Crear una petición</a>
-                    <a href="{{ route('login') }}" class="btn button-start-ai py-3 fw-bold">Comenzar con IA</a>
                 @endif
             </div>
 
@@ -197,16 +195,10 @@
                                         <a href="{{ route('petitions.create') }}"
                                            class="btn button-create-petition py-3 fw-bold btn-responsive">Crear una
                                             petición</a>
-                                        <a href="{{ route('petitions.create') }}"
-                                           class="btn button-start-ai py-3 fw-bold btn-responsive">Comenzar con
-                                            IA</a>
                                     @else
                                         <a href="{{ route('login') }}"
                                            class="btn button-create-petition py-3 fw-bold btn-responsive">Crear una
                                             petición</a>
-                                        <a href="{{ route('login') }}"
-                                           class="btn button-start-ai py-3 fw-bold btn-responsive">Comenzar con
-                                            IA</a>
                                     @endif
                                 </div>
                             </div>
