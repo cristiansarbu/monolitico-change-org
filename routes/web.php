@@ -29,7 +29,6 @@ Route::controller(\App\Http\Controllers\PetitionController::class)->group(functi
     Route::post('petitions/sign/{id}', 'sign')->name('petitions.sign')->middleware('auth');
     Route::delete('petitions/{id}', 'delete')->name('petitions.delete')->middleware('auth');
     Route::put('petitions/{id}', 'update')->name('petitions.update')->middleware('auth');
-
 });
 
 Route::get('/users/firmas', [\App\Http\Controllers\UserController::class, 'petitionsFirmadas'])
