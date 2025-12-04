@@ -108,8 +108,6 @@ class PetitionController extends Controller
                 return $fileModel;
             }
             return 1;
-        } else {
-
         }
     }
 
@@ -126,21 +124,53 @@ class PetitionController extends Controller
             'description' => 'required',
             'destinatary' => 'required',
             'category_id' => 'required',
-            'file' => 'nullable|required|file|mimes:jpeg,png,jpg,svg'
+            'file' => 'nullable|file|mimes:jpeg,png,jpg,svg'
         ]);
 
-        $input = $request->all();
+        $input = $request->except('file');
 
         try {
             $petition->update($input);
-            if ($petition->category_id !== $request->category_id) {
-                $category = Category::findOrFail($request->category_id);
-                $petition->category()->associate($category);
+
+            if ($request->hasFile('file')) {
+                $fileExistente = File::where('petition_id', $id)->first();
+                $fileExistentePath = public_path('petitions/' . $fileExistente->file_path);
+                unlink($fileExistentePath);
+                $fileExistente->delete();
+
+                $this->fileUpload($request, $petition->id);
             }
-            $petition->save();
+
             return redirect('/mypetitions')->with('success', 'Petición actualizada correctamente.');
         } catch (\Exception $exception) {
             return back()->withError($exception->getMessage())->withInput();
+        }
+    }
+
+    public function delete($id) {
+        try {
+            $petition = Petition::findOrFail($id);
+
+            if ($petition->user_id !== Auth::id()) {
+                return back()->withError('No tienes permiso para eliminar esta petición.');
+            }
+
+            $file = File::where('petition_id', $id)->first();
+
+            if ($file) {
+                $filePath = public_path('petitions/' . $file->file_path);
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+                $file->delete();
+            }
+
+            $petition->signers()->detach();
+            $petition->delete();
+
+            return redirect('/mypetitions')->with('success', 'Petición eliminada correctamente.');
+        } catch (\Exception $e) {
+            return back()->withError($e->getMessage())->withInput();
         }
     }
 

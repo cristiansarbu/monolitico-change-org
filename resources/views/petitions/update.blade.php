@@ -24,8 +24,9 @@
                 </div>
             @endif
 
-            <form action="{{ route('petitions.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('petitions.update', $petition->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
 
                 <div class="mb-4">
                     <label for="title" class="form-label fw-bold">Título de la petición *</label>
@@ -64,7 +65,7 @@
                 <div class="mb-4">
                     <label for="category_id" class="form-label fw-bold">Categoría de la petición *</label>
                     <select id="category_id" name="category_id"
-                            class="form-select @error('category') is-invalid @enderror">
+                            class="form-select @error('category_id') is-invalid @enderror">
 
                         <option value="">Selecciona una categoría</option>
 
@@ -100,7 +101,7 @@
                         Volver
                     </a>
                     <button type="submit" class="button-create-petition px-4 py-2 fw-bold">
-                        Crear petición
+                        Modificar petición
                     </button>
                 </div>
 
