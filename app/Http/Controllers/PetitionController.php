@@ -22,6 +22,9 @@ class PetitionController extends Controller
     {
         $petition = Petition::findOrFail($id);
         $user = $petition->user;
+        if ($user == Auth::user()) {
+            return view('petitions.showmine', compact('petition', 'user'));
+        }
         return view('petitions.show', compact('petition', 'user'));
     }
 
@@ -30,6 +33,12 @@ class PetitionController extends Controller
         $petitions = $category->petitions;
         $categories = Category::all();
         return view('petitions.index', compact('petitions', 'categories'));
+    }
+
+    public function getUpdatePage($id) {
+        $petition = Petition::findOrFail($id);
+        $categories = Category::all();
+        return view('petitions.update', compact('petition', 'categories'));
     }
 
     public function listMine(Request $request)
@@ -84,18 +93,85 @@ class PetitionController extends Controller
     public function fileUpload(Request $req, $petition_id = null)
     {
         $file = $req->file('file');
-        $fileModel = new File;
-        $fileModel->petition_id = $petition_id;
-        if ($req->file('file')) {
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move('petitions', $filename);
-            $fileModel->name = $filename;
-            $fileModel->file_path = $filename;
 
-            $res = $fileModel->save();
-            return $fileModel;
+        $fileModel = File::where('petition_id', $petition_id)->first();
+        if (!$fileModel) {
+            $fileModel = new File;
+            $fileModel->petition_id = $petition_id;
+            if ($req->file('file')) {
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $file->move('petitions', $filename);
+                $fileModel->name = $filename;
+                $fileModel->file_path = $filename;
+
+                $res = $fileModel->save();
+                return $fileModel;
+            }
+            return 1;
         }
-        return 1;
+    }
+
+    public function update(Request $request, $id)
+    {
+        $petition = Petition::findOrFail($id);
+
+        if ($petition->user_id !== Auth::id()) {
+            return back()->withError('No tienes permiso para editar esta petición.');
+        }
+
+        $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'destinatary' => 'required',
+            'category_id' => 'required',
+            'file' => 'nullable|file|mimes:jpeg,png,jpg,svg'
+        ]);
+
+        $input = $request->except('file');
+
+        try {
+            $petition->update($input);
+
+            if ($request->hasFile('file')) {
+                $fileExistente = File::where('petition_id', $id)->first();
+                $fileExistentePath = public_path('petitions/' . $fileExistente->file_path);
+                unlink($fileExistentePath);
+                $fileExistente->delete();
+
+                $this->fileUpload($request, $petition->id);
+            }
+
+            return redirect('/mypetitions')->with('success', 'Petición actualizada correctamente.');
+        } catch (\Exception $exception) {
+            return back()->withError($exception->getMessage())->withInput();
+        }
+    }
+
+    public function delete($id) {
+        try {
+            $petition = Petition::findOrFail($id);
+
+            if ($petition->user_id !== Auth::id()) {
+                return back()->withError('No tienes permiso para eliminar esta petición.');
+            }
+
+            $file = File::where('petition_id', $id)->first();
+
+            if ($file) {
+                $filePath = public_path('petitions/' . $file->file_path);
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+                $file->delete();
+            }
+
+            $petition->signers()->detach();
+            $petition->delete();
+
+            return redirect('/mypetitions')->with('success', 'Petición eliminada correctamente.');
+        } catch (\Exception $e) {
+            return back()->withError($e->getMessage())->withInput();
+        }
     }
 
     public function create()
