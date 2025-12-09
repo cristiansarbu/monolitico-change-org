@@ -15,7 +15,6 @@
 @section('content')
     <main>
         <div class="container-fluid main-container py-4 d-flex flex-column align-items-center">
-
             <!-- Main Movil -->
             <div class="container-fluid top-container d-flex flex-column text-center gap-3 d-lg-none">
                 <h1 class="fw-bold">El cambio comienza aquí<span class="text-danger">.</span></h1>
