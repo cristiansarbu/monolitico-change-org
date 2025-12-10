@@ -1,0 +1,22 @@
+/* Estilo para el contenedor principal de la tabla/header */
+.main-content {
+    margin-left: 250px; /* Deja espacio para la sidebar fija */
+    background-color: #f8f9fa; /* Color de fondo muy claro (grisáceo) */
+    min-height: 100vh;
+}
+
+.petition-description {
+    max-width: 350px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.petition-title {
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+

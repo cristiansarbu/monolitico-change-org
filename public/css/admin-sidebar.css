@@ -1,0 +1,19 @@
+/* Estilos de la barra lateral */
+.sidebar {
+    width: 250px; /* Ancho de la sidebar */
+    background-color: #e4202c !important; /* El color rojo intenso */
+    z-index: 1030; /* Asegura que esté sobre otros elementos */
+    min-height: 100vh; /* Asegura que ocupe todo el alto */
+}
+
+/* Estilos para los elementos de la lista/menú */
+.sidebar .list-group-item {
+    color: white !important; /* Texto blanco */
+    padding-left: 0.5rem; /* Ajuste el padding */
+}
+
+/* Estilo al pasar el ratón (hover) */
+.sidebar .list-group-item:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Ligero oscurecimiento al pasar el ratón */
+    cursor: pointer;
+}
