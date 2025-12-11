@@ -34,7 +34,6 @@ Route::controller(\App\Http\Controllers\PetitionController::class)->group(functi
 Route::middleware('admin')->controller(\App\Http\Controllers\AdminPetitionController::class)->group(function() {
     Route::get('admin', 'index')->name('admin.home');
 
-    Route::get('admin/petitions/index', 'index')->name('adminpetitions.index');
     Route::get('admin/petitions/{id}', 'show')->name('adminpetitions.show');
     Route::get('admin/petitions/add', 'create')->name('adminpetitions.create');
     Route::get('admin/petitions/edit/{id}', 'edit')->name('adminpetitions.edit');
@@ -46,27 +45,27 @@ Route::middleware('admin')->controller(\App\Http\Controllers\AdminPetitionContro
 });
 
 Route::middleware('admin')->controller(\App\Http\Controllers\AdminCategoryController::class)->group(function() {
-    Route::get('admin/categories/index', 'index')->name('adminpetitions.index');
-    Route::get('admin/categories/{id}', 'show')->name('adminpetitions.show');
-    Route::get('admin/categories/add', 'create')->name('adminpetitions.create');
-    Route::get('admin/categories/edit/{id}', 'edit')->name('adminpetitions.edit');
+    Route::get('admin/categories/index', 'index')->name('admincategories.index');
+    Route::get('admin/categories/{id}', 'show')->name('admincategories.show');
+    Route::get('admin/categories/add', 'create')->name('admincategories.create');
+    Route::get('admin/categories/edit/{id}', 'edit')->name('admincategories.edit');
 
-    Route::post('admin/categories', 'store')->name('adminpetitions.store');
-    Route::delete('admin/categories/{id}', 'delete')->name('adminpetitions.delete');
-    Route::put('admin/categories/{id}', 'update')->name('adminpetitions.update');
-    Route::put('admin/categories/status/{id}', 'changeStatus')->name('adminpetitions.estado');
+    Route::post('admin/categories', 'store')->name('admincategories.store');
+    Route::delete('admin/categories/{id}', 'delete')->name('admincategories.delete');
+    Route::put('admin/categories/{id}', 'update')->name('admincategories.update');
+    Route::put('admin/categories/status/{id}', 'changeStatus')->name('admincategories.estado');
 });
 
 Route::middleware('admin')->controller(\App\Http\Controllers\AdminUserController::class)->group(function() {
-    Route::get('admin/users/index', 'index')->name('adminpetitions.index');
-    Route::get('admin/users/{id}', 'show')->name('adminpetitions.show');
-    Route::get('admin/users/add', 'create')->name('adminpetitions.create');
-    Route::get('admin/users/edit/{id}', 'edit')->name('adminpetitions.edit');
+    Route::get('admin/users/index', 'index')->name('adminusers.index');
+    Route::get('admin/users/{id}', 'show')->name('adminusers.show');
+    Route::get('admin/users/add', 'create')->name('adminusers.create');
+    Route::get('admin/users/edit/{id}', 'edit')->name('adminusers.edit');
 
-    Route::post('admin/users', 'store')->name('adminpetitions.store');
-    Route::delete('admin/users/{id}', 'delete')->name('adminpetitions.delete');
-    Route::put('admin/users/{id}', 'update')->name('adminpetitions.update');
-    Route::put('admin/users/status/{id}', 'changeStatus')->name('adminpetitions.estado');
+    Route::post('admin/users', 'store')->name('adminusers.store');
+    Route::delete('admin/users/{id}', 'delete')->name('adminusers.delete');
+    Route::put('admin/users/{id}', 'update')->name('adminusers.update');
+    Route::put('admin/users/status/{id}', 'changeStatus')->name('adminusers.estado');
 });
 
 Route::get('/users/firmas', [\App\Http\Controllers\UserController::class, 'petitionsFirmadas'])

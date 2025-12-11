@@ -11,4 +11,9 @@ class AdminPetitionController extends Controller
         $petitions = Petition::all();
         return view('admin.home', compact('petitions'));
     }
+
+    public function show($id) {
+        $petition = Petition::firstOrFail($id);
+        return view('admin.petitions.show', compact($petition));
+    }
 }

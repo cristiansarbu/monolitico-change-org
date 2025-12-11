@@ -19,4 +19,20 @@
     text-overflow: ellipsis;
 }
 
+.table-action-btn {
+    min-width: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -4px;
+}
+
+.table-action-btn svg {
+    width: 14px;
+    height: 14px;
+    margin: 0 -2px;
+    vertical-align: middle;
+}
+
+
 
