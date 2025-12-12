@@ -61,10 +61,9 @@
             <div class="container-fluid p-4">
 
                 <div class="d-flex mb-3 align-items-center">
-{{--                    <button class="btn btn-primary me-3 text-white">Crear petición</button>--}}
                     <a href="{{ route('adminpetitions.create') }}"
                        class="btn btn-primary me-3 text-white">
-                        Crear petición
+                        Crear categoría
                     </a>
                 </div>
 
@@ -75,61 +74,17 @@
                                 <thead class="bg-light">
                                 <tr>
                                     <th scope="col">Id</th>
-                                    <th scope="col">Título</th>
-                                    <th scope="col">Descripción</th>
-                                    <th scope="col">Firmantes</th>
-                                    <th scope="col">Estado</th>
+                                    <th scope="col">Nombre</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($petitions as $petition)
+                                @foreach($categories as $category)
                                     <tr>
-                                        <td>{{ $petition->id }}</td>
-                                        <td>{{ $petition->title }}</td>
-                                        <td class="petition-description">{{ $petition->description }}</td>
-                                        <td>{{ $petition->signers }}</td>
-                                        @if($petition->status == 'accepted')
-                                            <td><span class="badge bg-success text-white">Aceptada</span></td>
-                                        @else
-                                            <td><span class="badge bg-warning text-dark">Pendiente</span></td>
-                                        @endif
+                                        <td>{{ $category->id }}</td>
+                                        <td>{{ $category->name }}</td>
                                         <td>
-                                            <a href="{{ route('adminpetitions.show', $petition->id) }}"
-                                               class="table-action-btn rounded-pill bg-secondary text-white text-decoration-none me-2 px-3 py-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                     class="bi bi-eye" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
-                                                    <path
-                                                        d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
-                                                </svg>
-                                            </a>
-                                            <form action="{{ route('adminpetitions.status', $petition->id) }}"
-                                                  method="POST"
-                                                  class="d-inline">
-                                                @csrf
-                                                @method('PUT')
-                                                @if($petition->status == 'pending')
-                                                    <button type="submit"
-                                                            class="table-action-btn rounded-pill bg-success text-white text-decoration-none me-2 px-3 py-1 border-0">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                             class="bi bi-check" viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
-                                                        </svg>
-                                                    </button>
-                                                @else
-                                                    <button type="submit"
-                                                            class="table-action-btn rounded-pill bg-warning text-white text-decoration-none me-2 px-3 py-1 border-0">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
-                                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                                                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-                                                        </svg>
-                                                    </button>
-                                                @endif
-                                            </form>
-                                            <a href="{{ route('adminpetitions.edit', $petition) }}"
+                                            <a href="{{ route('admincategories.edit', $category) }}"
                                                class="table-action-btn rounded-pill text-white text-decoration-none me-2 px-3 py-1"
                                                style="background-color: #9c27b0;">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -143,7 +98,7 @@
                                             <button type="button"
                                                     class="table-action-btn rounded-pill bg-danger text-white text-decoration-none px-3 py-1 border-0"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#confirmDeleteModal{{ $petition->id }}">
+                                                    data-bs-target="#confirmDeleteModal{{ $category->id }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                                      class="bi bi-trash" viewBox="0 0 16 16">
                                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
@@ -151,7 +106,7 @@
                                                 </svg>
                                             </button>
                                             <!-- Modal de confirmación -->
-                                            <div class="modal fade" id="confirmDeleteModal{{ $petition->id }}" tabindex="-1" aria-hidden="true">
+                                            <div class="modal fade" id="confirmDeleteModal{{ $category->id }}" tabindex="-1" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
 
@@ -167,13 +122,12 @@
                                                         <div class="modal-footer d-flex justify-content-between">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 
-                                                            <form action="{{ route('adminpetitions.delete', $petition->id) }}" method="POST">
+                                                            <form action="{{ route('admincategories.delete', $category->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" class="btn btn-danger fw-bold">Eliminar definitivamente</button>
                                                             </form>
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -185,6 +139,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
         </div>

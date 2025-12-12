@@ -34,14 +34,14 @@ Route::controller(\App\Http\Controllers\PetitionController::class)->group(functi
 Route::middleware('admin')->controller(\App\Http\Controllers\AdminPetitionController::class)->group(function() {
     Route::get('admin', 'index')->name('admin.home');
 
-    Route::get('admin/petitions/{id}', 'show')->name('adminpetitions.show');
     Route::get('admin/petitions/add', 'create')->name('adminpetitions.create');
+    Route::get('admin/petitions/{id}', 'show')->name('adminpetitions.show');
     Route::get('admin/petitions/edit/{id}', 'edit')->name('adminpetitions.edit');
 
     Route::post('admin/petitions', 'store')->name('adminpetitions.store');
     Route::delete('admin/petitions/{id}', 'delete')->name('adminpetitions.delete');
     Route::put('admin/petitions/{id}', 'update')->name('adminpetitions.update');
-    Route::put('admin/petitions/status/{id}', 'changeStatus')->name('adminpetitions.estado');
+    Route::put('admin/petitions/status/{id}', 'changeStatus')->name('adminpetitions.status');
 });
 
 Route::middleware('admin')->controller(\App\Http\Controllers\AdminCategoryController::class)->group(function() {
@@ -59,7 +59,6 @@ Route::middleware('admin')->controller(\App\Http\Controllers\AdminCategoryContro
 Route::middleware('admin')->controller(\App\Http\Controllers\AdminUserController::class)->group(function() {
     Route::get('admin/users/index', 'index')->name('adminusers.index');
     Route::get('admin/users/{id}', 'show')->name('adminusers.show');
-    Route::get('admin/users/add', 'create')->name('adminusers.create');
     Route::get('admin/users/edit/{id}', 'edit')->name('adminusers.edit');
 
     Route::post('admin/users', 'store')->name('adminusers.store');

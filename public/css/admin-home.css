@@ -34,5 +34,29 @@
     vertical-align: middle;
 }
 
+.table-action-btn {
+    transition: background-color 0.2s ease;
+}
+
+.table-action-btn.bg-secondary:hover {
+    background-color: #9fa6b2 !important; /* gris más claro que el secondary */
+}
+
+.table-action-btn.bg-success:hover {
+    background-color: #4ade80 !important; /* verde más claro */
+}
+
+.table-action-btn.bg-danger:hover {
+    background-color: #f97373 !important; /* rojo más claro */
+}
+
+.table-action-btn:hover[style*="background-color: #9c27b0"] {
+    background-color: #ce68e6 !important; /* morado más claro */
+}
+
+.table-action-btn.bg-warning:hover {
+    background-color: #fec84b !important; /* amarillo más claro */
+}
+
 
 
