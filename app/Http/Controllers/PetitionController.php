@@ -114,6 +114,7 @@ class PetitionController extends Controller
     public function update(Request $request, $id)
     {
         $petition = Petition::findOrFail($id);
+        $this->authorize('update', $petition);
 
         if ($petition->user_id !== Auth::id()) {
             return back()->withError('No tienes permiso para editar esta petición.');

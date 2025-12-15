@@ -59,14 +59,6 @@
 
         <div class="main-content flex-grow-1">
             <div class="container-fluid p-4">
-
-                <div class="d-flex mb-3 align-items-center">
-                    <a href="{{ route('admincategories.create') }}"
-                       class="btn btn-primary me-3 text-white">
-                        Crear categoría
-                    </a>
-                </div>
-
                 <div class="card shadow-sm border-0">
                     <div class="card-body p-0">
                         <div class="table-responsive">
@@ -75,16 +67,32 @@
                                 <tr>
                                     <th scope="col">Id</th>
                                     <th scope="col">Nombre</th>
+                                    <th scope="col">Correo Electrónico</th>
+                                    <th scope="col">Contraseña</th>
+                                    <th scope="col">Admin</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($categories as $category)
+                                @foreach($users as $user)
                                     <tr>
-                                        <td>{{ $category->id }}</td>
-                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->password }}</td>
+                                        <td>{{ $user->admin }}</td>
                                         <td>
-                                            <a href="{{ route('admincategories.edit', $category) }}"
+                                            <a href="{{ route('adminusers.show', $user->id) }}"
+                                               class="table-action-btn rounded-pill bg-secondary text-white text-decoration-none me-2 px-3 py-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                     class="bi bi-eye" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                                    <path
+                                                        d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                                                </svg>
+                                            </a>
+                                            <a href="{{ route('adminusers.edit', $user) }}"
                                                class="table-action-btn rounded-pill text-white text-decoration-none me-2 px-3 py-1"
                                                style="background-color: #9c27b0;">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -98,7 +106,7 @@
                                             <button type="button"
                                                     class="table-action-btn rounded-pill bg-danger text-white text-decoration-none px-3 py-1 border-0"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#confirmDeleteModal{{ $category->id }}">
+                                                    data-bs-target="#confirmDeleteModal{{ $user->id }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                                      class="bi bi-trash" viewBox="0 0 16 16">
                                                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
@@ -106,23 +114,23 @@
                                                 </svg>
                                             </button>
                                             <!-- Modal de confirmación -->
-                                            <div class="modal fade" id="confirmDeleteModal{{ $category->id }}" tabindex="-1" aria-hidden="true">
+                                            <div class="modal fade" id="confirmDeleteModal{{ $user->id }}" tabindex="-1" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
 
                                                         <div class="modal-header bg-danger text-white">
-                                                            <h5 class="modal-title fw-bold">¿Seguro que quieres eliminar esta petición?</h5>
+                                                            <h5 class="modal-title fw-bold">¿Seguro que quieres eliminar este usuario?</h5>
                                                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                                                         </div>
 
                                                         <div class="modal-body text-center">
-                                                            Esta acción no se puede deshacer. Se eliminará la petición permanentemente.
+                                                            Esta acción no se puede deshacer. Se eliminará el usuario permanentemente.
                                                         </div>
 
                                                         <div class="modal-footer d-flex justify-content-between">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 
-                                                            <form action="{{ route('admincategories.delete', $category->id) }}" method="POST">
+                                                            <form action="{{ route('adminusers.delete', $user->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" class="btn btn-danger fw-bold">Eliminar definitivamente</button>

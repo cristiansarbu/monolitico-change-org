@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <title>Editar categoría - Change.org</title>
+    <title>Crear categoría - Change.org</title>
 @endsection
 
 @section('styles')
@@ -12,7 +12,7 @@
     <main class="container d-flex justify-content-center mt-3">
         <div class="p-4 p-md-5 contenedor-todo">
 
-            <h1 class="fw-bold fs-3 mb-2 fs-2rem">Editar la categoría</h1>
+            <h1 class="fw-bold fs-3 mb-2 fs-2rem">Crear la categoría</h1>
 
             @if (session('error'))
                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
@@ -21,16 +21,15 @@
                 </div>
             @endif
 
-            <form action="{{ route('admincategories.update', $category->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admincategories.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
+                @method('POST')
 
                 <div class="mb-4">
                     <label for="name" class="form-label fw-bold">Nombre de la categoría</label>
                     <input type="text" id="name" name="name"
                            class="form-control @error('name') is-invalid @enderror"
-                           placeholder="Ejemplo: Queremos que el gobierno mejore la atención sanitaria."
-                           value="{{ old('name', $category->name) }}">
+                           placeholder="Ejemplo: Sanidad Pública"
                     @error('name')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -41,7 +40,7 @@
                         Volver
                     </a>
                     <button type="submit" class="button-create-petition px-4 py-2 fw-bold">
-                        Modificar categoría
+                        Crear categoría
                     </button>
                 </div>
             </form>
