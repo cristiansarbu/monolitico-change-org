@@ -126,6 +126,10 @@ class AdminPetitionController extends Controller
         try {
             $petition = Petition::findOrFail($id);
 
+            if ($petition->signers > 0) {
+                return back()->withError('No se puede eliminar una petición que ha sido firmada.');
+            }
+
             $file = File::where('petition_id', $id)->first();
 
             if ($file) {

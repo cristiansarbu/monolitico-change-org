@@ -57,6 +57,11 @@ class AdminCategoryController extends Controller
     public function delete($id) {
         try {
             $category = Category::findOrFail($id);
+
+            if ($category->petitions->count() > 0) {
+                return back()->withError('No se puede eliminar una categoría que tiene peticiones activas.');
+            }
+
             $category->delete();
             return redirect('admin/categories/index')->with('success', 'Categoria eliminada correctamente.');
         } catch (\Exception $e) {

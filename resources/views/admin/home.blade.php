@@ -60,8 +60,24 @@
         <div class="main-content flex-grow-1">
             <div class="container-fluid p-4">
 
+                {{-- BLOQUE DE ALERTAS DE SESIÓN (PEGADO AQUÍ) --}}
+                @if(session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                @if(session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                {{-- FIN BLOQUE DE ALERTAS --}}
+
                 <div class="d-flex mb-3 align-items-center">
-{{--                    <button class="btn btn-primary me-3 text-white">Crear petición</button>--}}
+                    {{--                    <button class="btn btn-primary me-3 text-white">Crear petición</button>--}}
                     <a href="{{ route('adminpetitions.create') }}"
                        class="btn btn-primary me-3 text-white">
                         Crear petición
@@ -77,6 +93,7 @@
                                     <th scope="col">Id</th>
                                     <th scope="col">Título</th>
                                     <th scope="col">Descripción</th>
+                                    <th scope="col">Categoría</th>
                                     <th scope="col">Firmantes</th>
                                     <th scope="col">Estado</th>
                                     <th scope="col">Acciones</th>
@@ -88,6 +105,7 @@
                                         <td>{{ $petition->id }}</td>
                                         <td>{{ $petition->title }}</td>
                                         <td class="petition-description">{{ $petition->description }}</td>
+                                        <td>{{ $petition->category->name }}</td>
                                         <td>{{ $petition->signers }}</td>
                                         @if($petition->status == 'accepted')
                                             <td><span class="badge bg-success text-white">Aceptada</span></td>
@@ -150,7 +168,6 @@
                                                     <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
                                                 </svg>
                                             </button>
-                                            <!-- Modal de confirmación -->
                                             <div class="modal fade" id="confirmDeleteModal{{ $petition->id }}" tabindex="-1" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
@@ -186,7 +203,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

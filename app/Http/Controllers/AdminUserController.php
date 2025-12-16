@@ -33,22 +33,43 @@ class AdminUserController extends Controller
         ]);
 
         try {
-            $datosValidados['password'] = Hash::make($datosValidados['password']);
-            $user->name = $datosValidados['name'];
-            $user->email = $datosValidados['email'];
-
             if (isset($datosValidados['password'])) {
                 $user->password = Hash::make($datosValidados['password']);
             }
 
+            $user->name = $datosValidados['name'];
+            $user->email = $datosValidados['email'];
+
             if (isset($datosValidados['admin'])) {
                 $user->admin = $datosValidados['admin'];
+            } else {
+                $user->admin = 0;
             }
 
             $user->save();
             return redirect('admin/users/index')->with('success', 'Usuario actualizado correctamente.');
         } catch (\Exception $exception) {
             return back()->withError($exception->getMessage())->withInput();
+        }
+    }
+
+    public function delete($id) {
+        try {
+            $user = User::findOrFail($id);
+
+            if ($user->signedPetitions->count() > 0) {
+                return back()->withError('No se puede eliminar un usuario que ha firmado peticiones.');
+            }
+
+            if ($user->petitions->count() > 0) {
+                return back()->withError('No se puede eliminar un usuario que tiene peticiones.');
+            }
+
+            $user->delete();
+
+            return redirect('admin')->with('success', 'Usuario eliminado correctamente.');
+        } catch (\Exception $e) {
+            return back()->withError($e->getMessage())->withInput();
         }
     }
 }

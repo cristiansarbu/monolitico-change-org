@@ -129,8 +129,13 @@
                                     una
                                     petición</button>
                             </a>
-                            <a href="{{ route('profile.edit') }}"
-                               class="text-decoration-none text-dark fw-bold text-header-gray nav-item p-2 py-1 me-3">Perfil</a>
+                            @if(Auth::user()->admin === 1)
+                                <a href="{{ route('admin.home') }}"
+                                   class="text-decoration-none text-dark fw-bold text-header-gray nav-item p-2 py-1 me-3">Panel de Admin</a>
+                            @else
+                                <a href="{{ route('profile.edit') }}"
+                                   class="text-decoration-none text-dark fw-bold text-header-gray nav-item p-2 py-1 me-3">Perfil</a>
+                            @endif
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout').submit();"
                                class="text-decoration-none text-dark fw-bold text-header-gray nav-item p-2 py-1">Cerrar Sesión</a>
                             <form id="logout" action="{{route('logout')}}" method="POST" style="display: none;">
