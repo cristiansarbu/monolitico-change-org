@@ -102,6 +102,8 @@
 
                         <div class="buttons-right d-flex align-items-center d-none d-lg-flex">
                             @if(Auth::check())
+                                <a href="{{ url('/') }}"
+                                   class="text-decoration-none text-dark fw-bold text-header-gray nav-item p-2 py-1 me-3">Área Principal</a>
                                 <a href="{{ route('profile.edit') }}"
                                    class="text-decoration-none text-dark fw-bold text-header-gray nav-item p-2 py-1 me-3">Perfil</a>
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout').submit();"

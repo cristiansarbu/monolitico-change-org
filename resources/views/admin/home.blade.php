@@ -60,7 +60,6 @@
         <div class="main-content flex-grow-1">
             <div class="container-fluid p-4">
 
-                {{-- BLOQUE DE ALERTAS DE SESIÓN (PEGADO AQUÍ) --}}
                 @if(session('error'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         {{ session('error') }}
@@ -74,7 +73,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
-                {{-- FIN BLOQUE DE ALERTAS --}}
 
                 <div class="d-flex mb-3 align-items-center">
                     {{--                    <button class="btn btn-primary me-3 text-white">Crear petición</button>--}}

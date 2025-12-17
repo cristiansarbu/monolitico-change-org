@@ -67,7 +67,4 @@ Route::middleware('admin')->controller(\App\Http\Controllers\AdminUserController
     Route::put('admin/users/status/{id}', 'changeStatus')->name('adminusers.estado');
 });
 
-Route::get('/users/firmas', [\App\Http\Controllers\UserController::class, 'petitionsFirmadas'])
-    ->middleware('auth');
-
 require __DIR__.'/auth.php';
