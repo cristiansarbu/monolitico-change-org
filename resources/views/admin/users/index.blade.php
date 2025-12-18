@@ -158,17 +158,16 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            @if($users instanceof \Illuminate\Pagination\LengthAwarePaginator)
-                                @if ($users->hasPages())
-                                    <div class="d-flex justify-content-center mb-5">
-                                        {{ $users->links() }}
-                                    </div>
-                                @endif
-                            @endif
                         </div>
                     </div>
                 </div>
-
+                    @if($users instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                        @if ($users->hasPages())
+                            <div class="d-flex justify-content-center mb-5 mt-4">
+                                {{ $users->links() }}
+                            </div>
+                        @endif
+                    @endif
             </div>
 
         </div>

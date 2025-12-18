@@ -200,6 +200,13 @@
                         </div>
                     </div>
                 </div>
+                    @if($petitions instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                        @if ($petitions->hasPages())
+                            <div class="d-flex justify-content-center mb-5 mt-4">
+                                {{ $petitions->links() }}
+                            </div>
+                        @endif
+                    @endif
             </div>
         </div>
     </div>
