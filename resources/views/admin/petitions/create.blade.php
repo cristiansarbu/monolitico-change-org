@@ -1,4 +1,4 @@
-@extends('layouts.public')
+@extends('layouts.admin')
 
 @section('title')
     <title>Crear petición - Change.org</title>
@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <main class="container d-flex justify-content-center mt-3">
+    <div class="container d-flex justify-content-center mt-3">
         <div class="p-4 p-md-5 contenedor-todo">
 
             <h1 class="fw-bold fs-3 mb-2 fs-2rem">Crear una nueva petición</h1>
@@ -106,5 +106,5 @@
 
             </form>
         </div>
-    </main>
+    </div>
 @endsection

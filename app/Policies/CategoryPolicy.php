@@ -2,14 +2,15 @@
 
 namespace App\Policies;
 
+use App\Models\Category;
 use App\Models\Petition;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class PetitionPolicy
+class CategoryPolicy
 {
 
-    public function before(User $user, string $ability)
+    public function before(User $user)
     {
         if($user->admin == 1) {
             return true;
@@ -19,7 +20,7 @@ class PetitionPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Petition $petition): bool
+    public function view(User $user): bool
     {
         return true;
     }
@@ -28,14 +29,17 @@ class PetitionPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        if($user->admin == 1) {
+            return true;
+        }
+        return false;
     }
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Petition $petition): bool
+    public function update(User $user): bool
     {
-        if(($user->admin == 0) && ($petition->user_id == $user->id)){
+        if($user->admin == 1) {
             return true;
         }
         return false;
@@ -44,7 +48,7 @@ class PetitionPolicy
      * Determine whether the user can delete the model.
      */
     public function delete(User $user, Petition $petition): bool {
-        if(($user->admin == 0) && ($petition->user_id == $user->id)){
+        if($user->admin == 1) {
             return true;
         }
         return false;
