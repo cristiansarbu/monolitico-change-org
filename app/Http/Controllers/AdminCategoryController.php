@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AdminCategoryController extends Controller
 {
     public function index() {
-        $categories = Category::all();
+        $categories = Category::paginate(10);
         return view('admin.categories.index', compact('categories'));
     }
 

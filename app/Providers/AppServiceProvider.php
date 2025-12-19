@@ -17,11 +17,11 @@ class AppServiceProvider extends ServiceProvider
      * Register any application services.
      */
 
-//    protected $policies = [
-//        Petition::class => PetitionPolicy::class,
-//        Category::class => CategoryPolicy::class,
-//        User::class => UserPolicy::class,
-//    ];
+    protected $policies = [
+        Petition::class => PetitionPolicy::class,
+        Category::class => CategoryPolicy::class,
+        User::class => UserPolicy::class,
+    ];
 
     public function register(): void
     {

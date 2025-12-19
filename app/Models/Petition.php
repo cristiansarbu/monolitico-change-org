@@ -12,12 +12,12 @@ class Petition extends Model
         'description',
         'destinatary',
         'signers',
-        'status'
+        'status',
+        'category_id',
     ];
 
     protected $hidden = [
         'user_id',
-        'category_id'
     ];
     public function category() {
         return $this->belongsTo('App\Models\Category');

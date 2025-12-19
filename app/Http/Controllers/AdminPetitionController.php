@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class AdminPetitionController extends Controller
 {
     public function index() {
-        $petitions = Petition::all();
+        $petitions = Petition::paginate(10);
         return view('admin.home', compact('petitions'));
     }
 

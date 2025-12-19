@@ -115,6 +115,12 @@
                 </div>
             </div>
         </div>
-
+        @if($categories instanceof \Illuminate\Pagination\LengthAwarePaginator)
+            @if ($categories->hasPages())
+                <div class="d-flex justify-content-center mb-5 mt-4">
+                    {{ $categories->links() }}
+                </div>
+            @endif
+        @endif
     </div>
 @endsection

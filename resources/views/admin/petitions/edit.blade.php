@@ -79,7 +79,7 @@
                     </select>
 
                     <small class="text-muted">Elige una categoría que describa tu petición.</small>
-                    @error('category')
+                    @error('category_id')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>

@@ -31,28 +31,6 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="email" class="form-label text-muted">Correo Electrónico</label>
-                        <input id="email"
-                               type="email"
-                               name="email"
-                               class="form-control form-control-lg @error('email') is-invalid @enderror"
-                               value="{{ old('email', $user->email) }}"
-                               required autocomplete="username">
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="password" class="form-label text-muted">Nueva Contraseña (opcional)</label>
-                        <input id="password"
-                               type="password"
-                               name="password"
-                               class="form-control form-control-lg @error('password') is-invalid @enderror"
-                               value="{{ old('password') }}"
-                               autocomplete="new-password">
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                    </div>
-
-                    <div class="mb-4">
                         <div class="form-check">
                             <input id="admin"
                                    type="checkbox"

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 class AdminUserController extends Controller
 {
     public function index() {
-        $users = User::paginate(5);
+        $users = User::paginate(10);
         return view('admin.users.index', compact('users'));
     }
 
@@ -27,18 +27,11 @@ class AdminUserController extends Controller
         $user = User::findOrFail($id);
         $datosValidados = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'password' => 'nullable|string|min:8|max:255',
             'admin' => 'nullable|boolean',
         ]);
 
         try {
-            if (isset($datosValidados['password'])) {
-                $user->password = Hash::make($datosValidados['password']);
-            }
-
             $user->name = $datosValidados['name'];
-            $user->email = $datosValidados['email'];
 
             if (isset($datosValidados['admin'])) {
                 $user->admin = $datosValidados['admin'];
