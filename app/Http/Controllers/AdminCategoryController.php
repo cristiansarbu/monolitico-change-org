@@ -7,10 +7,6 @@ use Illuminate\Http\Request;
 
 class AdminCategoryController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Category::class, 'category');
-    }
     public function index() {
         $categories = Category::all();
         return view('admin.categories.index', compact('categories'));

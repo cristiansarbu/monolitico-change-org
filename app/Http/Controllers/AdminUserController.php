@@ -8,10 +8,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminUserController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(User::class, 'user');
-    }
     public function index() {
         $users = User::paginate(5);
         return view('admin.users.index', compact('users'));

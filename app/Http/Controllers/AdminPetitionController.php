@@ -10,10 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminPetitionController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Petition::class, 'petition');
-    }
     public function index() {
         $petitions = Petition::all();
         return view('admin.home', compact('petitions'));
